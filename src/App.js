@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+let yaml = undefined;
+import('dessert-yaml').then(m => yaml = m);
+
+// import yaml from 'js-yaml';
+
+
+class App extends Component {
+  state = {
+    content: '',
+    parsed: '',
+    elapsed: null,
+  };
+
+  handleInput = e => {
+    const start = Date.now();
+
+    const toBeParsed = e.target.value;
+
+    try {
+      const parsed = yaml.safeLoad(toBeParsed);
+
+      this.setState({
+        parsed: JSON.stringify(parsed),
+      });
+    } catch (e) {
+      this.setState({
+        parsed: 'Error: ' + e.toString(),
+      });
+    }
+
+    const end = Date.now();
+    this.setState({
+      elapsed: end - start,
+    })
+  };
+
+  render = () => {
+    const { elapsed, parsed } = this.state;
+    return (
+      <>
+      <textarea
+        cols={120}
+        style={{
+          minHeight: 300,
+        }}
+        onInput={this.handleInput}
+      />
+        <p>{elapsed}</p>
+        <p>{parsed}</p>
+      </>
+    );
+  }
 }
 
 export default App;

@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
-// let yaml = undefined;
-// import('dessert-yaml').then(m => yaml = m);
-
 import yaml from 'js-yaml';
 
+import defaultYaml from '../../services/defaultYaml';
 
-class Index extends Component {
+
+class YamlParser extends Component {
   state = {
-    content: '',
     parsed: '',
     elapsed: null,
   };
@@ -25,8 +22,9 @@ class Index extends Component {
         parsed: JSON.stringify(parsed, null, 2),
       });
     } catch (e) {
+      // Forward the error in the output area
       this.setState({
-        parsed: 'Error\n----\n' + e.toString(),
+        parsed: 'Error\n----\n' + e.message,
       });
     }
 
@@ -54,10 +52,12 @@ class Index extends Component {
                   background: 'rgb(250, 250, 250)',
                   spellcheck: false,
                 }}
-                onInput={this.handleInput}
+                onChange={this.handleInput}
+                defaultValue={defaultYaml}
               />
             </div>
           </div>
+
           <div className="pure-u-1-1 pure-u-sm-1-2">
             <div className="result">
               <SyntaxHighlighter
@@ -77,6 +77,7 @@ class Index extends Component {
             </div>
           </div>
         </div>
+
         {
           elapsed !== null &&
             <p className="time">
@@ -88,4 +89,4 @@ class Index extends Component {
   }
 }
 
-export default Index;
+export default YamlParser;

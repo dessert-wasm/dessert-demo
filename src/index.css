@@ -1,0 +1,84 @@
+@font-face {
+  font-family: 'Iosevka';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/IosevkaRegular.woff2');
+}
+
+@font-face {
+  font-family: 'Iosevka';
+  font-style: normal;
+  font-weight: 300;
+  src: url('fonts/IosevkaLighter.woff2');
+}
+
+a, a:visited{
+  color: black;
+  text-decoration: none;
+  border-bottom: 1.5px dashed black;
+  line-height: 1.3;
+}
+
+.page {
+  padding-top: 2em;
+  margin: 0 auto;
+  max-width: 1200px;
+  font-family: 'Iosevka', serif
+}
+
+.title {
+  padding: 0 20px 0 20px;
+  font-weight: lighter;
+  font-size: 50px;
+  text-align: center;
+}
+
+.intro {
+  padding: 10px 20px 50px 20px;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 600px;
+}
+
+.input, .result {
+  display: flex;
+  font-family: 'Iosevka', serif;
+}
+
+.time {
+  padding-top: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.emoji {
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 35.5em) {
+  .input {
+    padding: 0 20px 0 20px;
+    height: 300px;
+  }
+
+  .result {
+    padding: 20px;
+    height: 300px;
+  }
+
+  .time {
+    padding-bottom: 2em;
+  }
+}
+
+@media screen and (min-width: 35.5em) {
+  .input {
+    padding: 0 10px 0 15px;
+    height: 500px;
+  }
+
+  .result {
+    padding: 0 15px 0 10px;
+    height: 500px;
+  }
+}

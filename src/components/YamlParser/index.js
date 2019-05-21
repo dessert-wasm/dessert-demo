@@ -12,12 +12,15 @@ class YamlParser extends Component {
     elapsed: null,
   };
 
-  handleInput = e => {
+  componentDidMount = () => {
+    this.handleParsing(defaultYaml);
+  }
+
+  handleParsing = text => {
     const start = Date.now();
-    const toBeParsed = e.target.value;
 
     try {
-      const parsed = yaml.safeLoad(toBeParsed);
+      const parsed = yaml.safeLoad(text);
       this.setState({
         parsed: JSON.stringify(parsed, null, 2),
       });
@@ -29,9 +32,15 @@ class YamlParser extends Component {
     }
 
     const end = Date.now();
+
     this.setState({
       elapsed: end - start,
     })
+  }
+
+  handleInput = e => {
+    const toBeParsed = e.target.value;
+    this.handleParsing(toBeParsed);
   };
 
   render = () => {

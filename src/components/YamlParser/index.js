@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { solarizedlight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import yaml from 'js-yaml';
+import yaml from 'yaml-js';
 
 import defaultYaml from '../../services/defaultYaml';
 
+
+// let yaml;
 
 class YamlParser extends Component {
   state = {
@@ -12,15 +14,16 @@ class YamlParser extends Component {
     elapsed: null,
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.handleParsing(defaultYaml);
+    // yaml = await import('dessert-yaml-js');
   }
 
   handleParsing = text => {
     const start = Date.now();
 
     try {
-      const parsed = yaml.safeLoad(text);
+      const parsed = yaml.load(text);
       this.setState({
         parsed: JSON.stringify(parsed, null, 2),
       });

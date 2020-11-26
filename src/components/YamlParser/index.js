@@ -6,8 +6,6 @@ import yaml from 'yaml-js';
 import defaultYaml from '../../services/defaultYaml';
 
 
-// let yaml;
-
 class YamlParser extends Component {
   state = {
     parsed: '',
@@ -16,7 +14,6 @@ class YamlParser extends Component {
 
   componentDidMount = async () => {
     this.handleParsing(defaultYaml);
-    // yaml = await import('dessert-yaml-js');
   }
 
   handleParsing = text => {
